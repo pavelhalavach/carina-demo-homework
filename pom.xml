@@ -5,10 +5,10 @@
 
 	<modelVersion>4.0.0</modelVersion>
 	<groupId>com.zebrunner</groupId>
-	<artifactId>carina-demo</artifactId>
+	<artifactId>api-testing</artifactId>
 	<version>1.0</version>
 	<packaging>jar</packaging>
-	<name>Carina Demo</name>
+	<name>API Testing</name>
 	<url>http://www.zebrunner.com/</url>
 
 	<properties>

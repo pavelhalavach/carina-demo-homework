@@ -23,8 +23,6 @@ import com.zebrunner.carina.demo.api.post.*;
 
 import org.testng.annotations.Test;
 
-import static org.testng.AssertJUnit.assertEquals;
-
 public class APIPostTest implements IAbstractTest {
 
     @Test()
@@ -42,8 +40,7 @@ public class APIPostTest implements IAbstractTest {
         GetPostsMethod api = new GetPostsMethod();
         api.callAPIExpectSuccess();
         api.validateResponseAgainstSchema("api/posts/_get/rs.schema");
-
-        assertEquals(50, api.callAPI().jsonPath().getList("$").size());
+        api.validateResponse();
     }
 
     @Test()
@@ -51,8 +48,7 @@ public class APIPostTest implements IAbstractTest {
     public void testGetPost() {
         GetPostMethod api = new GetPostMethod();
         api.callAPIExpectSuccess();
-
-        assertEquals(2, api.callAPI().jsonPath().getInt(("id")));
+        api.validateResponse();
     }
 
     @Test()
@@ -68,8 +64,14 @@ public class APIPostTest implements IAbstractTest {
     @Test()
     @MethodOwner(owner = "pavel")
     public void testPutPost() {
+        testCreatePost();
         PutPostMethod api = new PutPostMethod();
+        api.setProperties("api/posts/postPut.properties");
         api.callAPIExpectSuccess();
         api.validateResponse();
+        DeletePostMethod apiDelete = new DeletePostMethod();
+        apiDelete.setProperties("api/posts/postPut.properties");
+        apiDelete.callAPIExpectSuccess();
+        apiDelete.validateResponse();
     }
 }

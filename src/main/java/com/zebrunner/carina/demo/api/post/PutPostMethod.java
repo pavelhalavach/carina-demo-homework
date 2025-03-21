@@ -9,11 +9,12 @@ import com.zebrunner.carina.api.http.HttpMethodType;
 import com.zebrunner.carina.api.http.HttpResponseStatusType;
 import com.zebrunner.carina.utils.config.Configuration;
 
-@Endpoint(url = "${base_url}/posts/5", methodType = HttpMethodType.PUT)
+@Endpoint(url = "${base_url}/posts/51", methodType = HttpMethodType.PUT)
+@RequestTemplatePath(path = "api/posts/_put/rq.json")
+@ResponseTemplatePath(path = "api/posts/_put/rs.json")
 @SuccessfulHttpStatus(status = HttpResponseStatusType.OK_200)
 public class PutPostMethod extends AbstractApiMethodV2 {
     public PutPostMethod() {
-        super("api/posts/_put/rq.json", "api/posts/_put/rs.json", "api/posts/post.properties");
         replaceUrlPlaceholder("base_url", Configuration.getRequired("api_url"));
     }
 }

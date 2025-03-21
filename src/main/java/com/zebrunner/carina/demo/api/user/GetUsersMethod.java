@@ -24,7 +24,7 @@ import com.zebrunner.carina.api.http.HttpResponseStatusType;
 import com.zebrunner.carina.utils.config.Configuration;
 
 @Endpoint(url = "${base_url}/users", methodType = HttpMethodType.GET)
-@ResponseTemplatePath(path = "api/users/_get/rs.json")
+@ResponseTemplatePath(path = "api/users/_get/rsGetUsers.json")
 @SuccessfulHttpStatus(status = HttpResponseStatusType.OK_200)
 public class GetUsersMethod extends AbstractApiMethodV2 {
 

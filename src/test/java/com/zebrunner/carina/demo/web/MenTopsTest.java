@@ -28,8 +28,8 @@ public class MenTopsTest implements IAbstractTest {
     public void testMenTopsProductsQuantityMatchesExpected() {
         Assert.assertTrue(topMenuSignOut.isMenTopsDisplayed(), "MenTops is not displayed");
         MenTopsPage menTopsPage = topMenuSignOut.openMenTopsPage();
-        menTopsPage.clickNextButton();
-        Assert.assertEquals(menTopsPage.getProductItemsQuantity(), menTopsPage.getAllProducts().size());
+        List<ProductItem> products = menTopsPage.getAllProducts();
+        Assert.assertEquals(menTopsPage.getProductItemsQuantity(), products.size());
     }
 
     @Test
@@ -37,7 +37,8 @@ public class MenTopsTest implements IAbstractTest {
         Assert.assertTrue(topMenuSignOut.isMenTopsDisplayed(), "MenTops is not displayed");
         MenTopsPage menTopsPage = topMenuSignOut.openMenTopsPage();
 
-        Assert.assertEquals(menTopsPage.getProductItemsQuantity(), menTopsPage.getAllProducts().size());
+        Assert.assertEquals(menTopsPage.getProductItemsOnPageQuantity(),
+                menTopsPage.getAllProductsOnPage().size());
     }
 
     @Test
@@ -45,7 +46,7 @@ public class MenTopsTest implements IAbstractTest {
         Assert.assertTrue(topMenuSignOut.isMenTopsDisplayed(), "MenTops is not displayed");
         MenTopsPage menTopsPage = topMenuSignOut.openMenTopsPage();
 
-        List<ProductItem> products = menTopsPage.getAllProductsOnPage();
+        List<ProductItem> products = menTopsPage.getAllProducts();
         for (ProductItem product : products) {
             Assert.assertFalse(product.getProductName().isEmpty(), "Product name should not be empty");
             Assert.assertFalse(product.getProductImage().isEmpty(), "Product image should not be empty");

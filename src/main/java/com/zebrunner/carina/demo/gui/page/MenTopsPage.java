@@ -3,8 +3,12 @@ package com.zebrunner.carina.demo.gui.page;
 import com.zebrunner.carina.demo.gui.component.ProductItem;
 import com.zebrunner.carina.webdriver.decorator.ExtendedWebElement;
 import com.zebrunner.carina.webdriver.gui.AbstractPage;
+
 import org.openqa.selenium.JavascriptExecutor;
+import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
+import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.FindBy;
 
 import java.util.ArrayList;
@@ -15,12 +19,15 @@ public class MenTopsPage extends AbstractPage {
     @FindBy(xpath = "//div[contains(@class,'product-item-info')]")
     private List<ExtendedWebElement> productItemsElements;
 
-    @FindBy(xpath = "//li[contains(@class,'pages-item-next')]//a[contains(@class,'next')]")
-//    @FindBy(css = "li.item.pages-item-next a.action.next")
+//    @FindBy(xpath = "//li[contains(@class,'pages-item-next')]//a[contains(@class,'next')]/span[text()='Next']")
+    @FindBy(css = "li.item.pages-item-next a.action.next")
     private ExtendedWebElement nextButton;
 
-    @FindBy(xpath = "//*[@id=\"toolbar-amount\"]/span[2]")
+    @FindBy(xpath = "//*[@id=\"toolbar-amount\"]/span[3]")
     private ExtendedWebElement productItemsQuantity;
+
+    @FindBy(xpath = "//*[@id=\"toolbar-amount\"]/span[2]")
+    private ExtendedWebElement productItemsQuantityOnPage;
 
     @FindBy(xpath = "//*[@id=\"maincontent\"]/div[3]/div[1]/div[4]")
     private ExtendedWebElement toolBar;
@@ -39,7 +46,7 @@ public class MenTopsPage extends AbstractPage {
                             new ProductItem(getDriver(), element))
                     .collect(Collectors.toList())
             );
-            if (nextButton.isClickable()) {
+            if (nextButton.isPresent()) {
                 clickNextButton();
             } else {
                 break;
@@ -59,12 +66,12 @@ public class MenTopsPage extends AbstractPage {
         return Integer.parseInt(productItemsQuantity.getText());
     }
 
-    public void clickNextButton() {
-//        toolBar.scrollTo();
-        JavascriptExecutor jsExecutor = (JavascriptExecutor) getDriver();
-        jsExecutor.executeScript("arguments[0].scrollIntoView(true);", nextButton.getElement());
-        pause(2);
-        nextButton.click();
+    public Integer getProductItemsOnPageQuantity() {
+        return Integer.parseInt(productItemsQuantityOnPage.getText());
+    }
 
+    public void clickNextButton() {
+        ((JavascriptExecutor) getDriver())
+                .executeScript("arguments[0].click();", nextButton.getElement());
     }
 }

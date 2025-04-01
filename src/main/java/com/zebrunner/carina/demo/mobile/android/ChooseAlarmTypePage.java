@@ -1,10 +1,13 @@
 package com.zebrunner.carina.demo.mobile.android;
 
 import com.zebrunner.carina.demo.mobile.common.ChooseAlarmTypePageBase;
+import com.zebrunner.carina.demo.mobile.common.SimpleAlarmPageBase;
+import com.zebrunner.carina.utils.factory.DeviceType;
 import com.zebrunner.carina.webdriver.decorator.ExtendedWebElement;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.support.FindBy;
 
+@DeviceType(pageType = DeviceType.Type.ANDROID_PHONE, parentClass = ChooseAlarmTypePageBase.class)
 public class ChooseAlarmTypePage extends ChooseAlarmTypePageBase {
     @FindBy(xpath = "(//androidx.cardview.widget" +
             ".CardView[@resource-id='com.alarmclock.xtreme.free:id/crv_large_tile_root'])[1]" +
@@ -38,5 +41,10 @@ public class ChooseAlarmTypePage extends ChooseAlarmTypePageBase {
     }
     public boolean isCustomAlarmPresent() {
         return customAlarm.isPresent();
+    }
+    @Override
+    public SimpleAlarmPageBase goToSimpleAlarmPage() {
+        simpleAlarm.click();
+        return new SimpleAlarmPage(getDriver());
     }
 }

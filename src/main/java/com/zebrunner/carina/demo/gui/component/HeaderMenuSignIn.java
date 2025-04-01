@@ -1,7 +1,6 @@
 package com.zebrunner.carina.demo.gui.component;
 
-import com.zebrunner.carina.demo.gui.page.CustomerLoginPage;
-import com.zebrunner.carina.demo.gui.page.MenTopsPage;
+import com.zebrunner.carina.demo.gui.page.HeaderMenuItemPage;
 import com.zebrunner.carina.demo.gui.page.MyAccountPage;
 import com.zebrunner.carina.webdriver.decorator.ExtendedWebElement;
 import com.zebrunner.carina.webdriver.gui.AbstractUIObject;
@@ -9,17 +8,20 @@ import org.openqa.selenium.SearchContext;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.support.FindBy;
 
-public class TopMenuSignIn extends AbstractUIObject{
+import java.util.List;
+
+public class HeaderMenuSignIn extends AbstractUIObject{
     @FindBy(css = "button.action.switch")
     private ExtendedWebElement buttonActionSwitch;
     @FindBy(linkText = "My Account")
     private ExtendedWebElement myAccountLink;
-    @FindBy(xpath = "//*[@id=\"ui-id-2\"]/li[3]")
+    @FindBy(xpath = "//*[@id='ui-id-2']/li[3]")
     private ExtendedWebElement menMenu;
-    @FindBy(xpath = "//*[@id=\"ui-id-17\"]")
+    @FindBy(xpath = "//*[@id='ui-id-17']")
     private ExtendedWebElement menTopsSubmenu;
 
-    public TopMenuSignIn(WebDriver driver, SearchContext searchContext) {
+
+    public HeaderMenuSignIn(WebDriver driver, SearchContext searchContext) {
         super(driver, searchContext);
     }
 
@@ -38,10 +40,13 @@ public class TopMenuSignIn extends AbstractUIObject{
         return menTopsSubmenu.isDisplayed();
     }
 
-    public MenTopsPage openMenTopsPage(){
+    public HeaderMenuItemPage openHeaderMenuItemPage(Integer id){
+        if (id > 2 && id < 9) {
+
+        }
         hoverOnMenMenu();
         menTopsSubmenu.click();
-        return new MenTopsPage(getDriver());
+        return new HeaderMenuItemPage(getDriver());
     }
 
 }

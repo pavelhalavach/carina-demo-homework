@@ -15,10 +15,8 @@ public class ProductItem extends AbstractUIObject {
     private String price;
     private String image;
 
-//    @FindBy(css = "button.action.tocart")
     private ExtendedWebElement addToCartButton;
 
-//    @FindBy(css = ".product-item-info")
     private ExtendedWebElement productCard;
 
     public ProductItem(WebDriver driver, ExtendedWebElement productCard) {
@@ -33,7 +31,6 @@ public class ProductItem extends AbstractUIObject {
 
     public String getProductName() {
         return name;
-//        return productName.getText();
     }
 
     public String getProductPrice() {
